@@ -8,11 +8,7 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  routeRules: {
-    '/': { prerender: false }
-  },
-
-  compatibilityDate: '2026-06-30',
+  compatibilityDate: '2026-09-04',
 
   nitro: {
     preset: 'cloudflare_module',
