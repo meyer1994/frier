@@ -14,27 +14,7 @@ export default defineNuxtConfig({
     preset: 'cloudflare_module',
     cloudflare: {
       deployConfig: true,
-      nodeCompat: true,
-      wrangler: {
-        name: 'frier',
-        compatibility_date: '2026-01-09',
-        observability: {
-          enabled: true
-        },
-        compatibility_flags: ['nodejs_compat'],
-        containers: [
-          {
-            class_name: 'Sandbox',
-            image: './Dockerfile',
-            instance_type: 'basic',
-            max_instances: 10
-          }
-        ],
-        assets: {
-          directory: './.output/public/',
-          binding: 'ASSETS'
-        }
-      }
+      nodeCompat: true
     }
   },
 
