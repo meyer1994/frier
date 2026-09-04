@@ -26,7 +26,7 @@ export default defineNuxtConfig({
           {
             class_name: 'Sandbox',
             image: './Dockerfile',
-            instance_type: 'lite',
+            instance_type: 'basic',
             max_instances: 10
           }
         ],
