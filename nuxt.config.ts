@@ -9,10 +9,14 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   routeRules: {
-    '/': { prerender: true }
+    '/': { prerender: false }
   },
 
   compatibilityDate: '2026-06-30',
+
+  nitro: {
+    preset: 'cloudflare-pages'
+  },
 
   eslint: {
     config: {

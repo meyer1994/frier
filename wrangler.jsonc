@@ -1,0 +1,14 @@
+{
+  "name": "frier",
+  "main": "./.output/server/index.mjs",
+  "compatibility_date": "2024-09-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "containers": [
+    {
+      "class_name": "Sandbox",
+      "image": "./Dockerfile",
+      "instance_type": "lite",
+      "max_instances": 10
+    }
+  ]
+}
