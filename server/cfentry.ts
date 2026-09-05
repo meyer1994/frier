@@ -3,6 +3,9 @@
  */
 import preset from 'nitropack/presets/cloudflare/runtime/cloudflare-module'
 
-export { Sandbox } from '@cloudflare/sandbox'
+import { Sandbox } from '@cloudflare/sandbox'
+
+export { Sandbox as Sandbox_CODESERVER }
+export { Sandbox as Sandbox_MARIMO }
 
 export default preset

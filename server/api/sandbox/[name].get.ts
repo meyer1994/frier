@@ -1,8 +1,8 @@
 import { getSandbox, type Sandbox } from '@cloudflare/sandbox'
 
 const CONFIG: Record<string, { binding: string; port: number; id: string }> = {
-  codeserver: { binding: 'Sandbox', port: 8443, id: 'frier-code-server' },
-  marimo: { binding: 'Marimo', port: 8080, id: 'frier-marimo' },
+  codeserver: { binding: 'Sandbox_CODESERVER', port: 8443, id: 'frier-code-server' },
+  marimo: { binding: 'Sandbox_MARIMO', port: 8080, id: 'frier-marimo' },
 }
 
 export default defineEventHandler(async (event) => {

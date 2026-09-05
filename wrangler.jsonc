@@ -15,12 +15,12 @@
   },
   "containers": [
     {
-      "class_name": "Sandbox",
+      "class_name": "Sandbox_CODESERVER",
       "image": "/home/joao/prj/frier/Dockerfile.codeserver",
       "instance_type": "standard-1"
     },
     {
-      "class_name": "Marimo",
+      "class_name": "Sandbox_MARIMO",
       "image": "/home/joao/prj/frier/Dockerfile.marimo",
       "instance_type": "standard-1"
     }
@@ -28,12 +28,12 @@
   "durable_objects": {
     "bindings": [
       {
-        "name": "Sandbox",
-        "class_name": "Sandbox"
+        "name": "Sandbox_CODESERVER",
+        "class_name": "Sandbox_CODESERVER"
       },
       {
-        "name": "Marimo",
-        "class_name": "Marimo"
+        "name": "Sandbox_MARIMO",
+        "class_name": "Sandbox_MARIMO"
       }
     ]
   },
@@ -41,13 +41,13 @@
     {
       "tag": "v1",
       "new_sqlite_classes": [
-        "Sandbox"
+        "Sandbox_CODESERVER"
       ]
     },
     {
       "tag": "v2",
       "new_sqlite_classes": [
-        "Marimo"
+        "Sandbox_MARIMO"
       ]
     }
   ]
