@@ -9,16 +9,30 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  "containers": [
-    {
-      "class_name": "Sandbox",
-      "image": "./Dockerfile",
-      "instance_type": "basic",
-      "max_instances": 10
-    }
-  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
-  }
+  },
+  "containers": [
+    {
+      "class_name": "Sandbox",
+      "image": "/home/joao/prj/frier/Dockerfile",
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "Sandbox",
+        "class_name": "Sandbox"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "Sandbox"
+      ]
+    }
+  ]
 }
