@@ -1,4 +1,12 @@
 <script setup>
+type Service = 'codeserver' | 'marimo'
+
+const services: { value: Service; label: string; description: string }[] = [
+  { value: 'codeserver', label: 'VS Code Server', description: 'Remote VS Code instance' },
+  { value: 'marimo', label: 'Marimo', description: 'Interactive Python notebooks' },
+]
+
+const selected = ref<Service>('codeserver')
 const url = ref('')
 const loading = ref(false)
 const error = ref('')
@@ -6,12 +14,12 @@ const error = ref('')
 async function onClick() {
   loading.value = true
   error.value = ''
+  url.value = ''
   try {
-    const res = await $fetch('/api/sandbox')
+    const res = await $fetch(`/api/sandbox/${selected.value}`)
     url.value = res.url
   } catch {
     error.value = 'Failed to start sandbox. Check console.'
-    url.value = ''
   } finally {
     loading.value = false
   }
@@ -21,14 +29,20 @@ async function onClick() {
 <template>
   <UContainer class="flex flex-col items-center justify-center min-h-screen gap-6">
     <h1 class="text-3xl font-bold">
-      VS Code Server
+      Sandbox Launcher
     </h1>
     <p class="text-muted text-sm">
-      Launch a remote VS Code instance via Cloudflare Sandbox
+      Launch a remote development environment via Cloudflare Sandbox
     </p>
 
+    <URadioGroup
+      v-model="selected"
+      :items="services"
+      orientation="horizontal"
+    />
+
     <UButton
-      label="Get VS Code URL"
+      :label="`Launch ${services.find(s => s.value === selected)?.label}`"
       icon="i-lucide-play"
       size="lg"
       :loading="loading"
