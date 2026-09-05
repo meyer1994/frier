@@ -17,6 +17,7 @@
     {
       "class_name": "Sandbox",
       "image": "/home/joao/prj/frier/Dockerfile",
+      "instance_type": "standard-1"
     }
   ],
   "durable_objects": {
