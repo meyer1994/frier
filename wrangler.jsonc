@@ -19,11 +19,7 @@
       "image": "/home/joao/prj/frier/Dockerfile.codeserver",
       "instance_type": "standard-1"
     },
-    {
-      "class_name": "Sandbox_MARIMO",
-      "image": "/home/joao/prj/frier/Dockerfile.marimo",
-      "instance_type": "standard-1"
-    }
+
   ],
   "durable_objects": {
     "bindings": [
@@ -31,18 +27,14 @@
         "name": "Sandbox_CODESERVER",
         "class_name": "Sandbox_CODESERVER"
       },
-      {
-        "name": "Sandbox_MARIMO",
-        "class_name": "Sandbox_MARIMO"
-      }
+
     ]
   },
   "migrations": [
     {
       "tag": "v1",
       "new_sqlite_classes": [
-        "Sandbox_CODESERVER",
-        "Sandbox_MARIMO"
+        "Sandbox_CODESERVER"
       ],
     }
   ]

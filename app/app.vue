@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import type { TabsItem } from '@nuxt/ui'
-
-type Service = 'codeserver' | 'marimo'
-
-const route = useRoute()
-const name = computed<Service>(() => route.query.name as Service ?? 'codeserver')
-const url = computed(() => `/api/sandbox/${name.value}`)
-const { data, error, execute, status } = useFetch(url, { immediate: false })
+const { data, error, execute, status } = useFetch('/api/sandbox/codeserver', { immediate: false })
 </script>
 
 <template>
@@ -18,19 +11,8 @@ const { data, error, execute, status } = useFetch(url, { immediate: false })
       Launch a remote development environment via Cloudflare Sandbox
     </p>
 
-    <UTabs
-      :model-value="name"
-      :items="([
-        { label: 'codeserver', value: 'codeserver' },
-        { label: 'marimo', value: 'marimo' }
-      ] satisfies TabsItem[])"
-      @update:model-value="async (v) => {
-        await navigateTo({ query: { name: v as string } })
-      }"
-    />
-
     <UButton
-      :label="`Launch ${name}`"
+      label="Launch Code Server"
       icon="i-lucide-play"
       size="lg"
       :loading="status === 'pending'"
@@ -45,6 +27,13 @@ const { data, error, execute, status } = useFetch(url, { immediate: false })
       class="w-full max-w-md"
     />
 
-    <pre>{{ data }}</pre>
+    <ULink
+      v-if="data?.url"
+      :href="data.url"
+      target="_blank"
+      class="text-primary hover:underline"
+    >
+      {{ data.url }}
+    </ULink>
   </UContainer>
 </template>

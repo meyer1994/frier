@@ -4,7 +4,7 @@
 interface __BaseEnv_Env {
 	ASSETS: Fetcher;
 	Sandbox_CODESERVER: DurableObjectNamespace /* Sandbox_CODESERVER */;
-	Sandbox_MARIMO: DurableObjectNamespace /* Sandbox_MARIMO */;
+
 }
 declare namespace Cloudflare {
 	interface Env extends __BaseEnv_Env {}
