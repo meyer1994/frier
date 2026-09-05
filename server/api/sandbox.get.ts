@@ -3,10 +3,10 @@ import { getSandbox, type Sandbox } from '@cloudflare/sandbox'
 const SANDBOX_ID = 'frier-code-server'
 
 export default defineEventHandler(async (event) => {
-  const env = event.context.cloudflare.env
-  if (!env.Sandbox) throw createError({ status: 500, message: 'Sandbox missing' })
+  const env = event.context.cloudflare.env.Sandbox as DurableObjectNamespace<Sandbox<unknown>>
+  if (!env) throw createError({ status: 500, message: 'Sandbox missing' })
 
-  const sandbox: Sandbox = getSandbox(env.Sandbox, SANDBOX_ID, {
+  const sandbox = getSandbox(env, SANDBOX_ID, {
     sleepAfter: '30m',
     transport: 'rpc'
   })

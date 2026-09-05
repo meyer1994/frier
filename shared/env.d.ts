@@ -1,11 +1,10 @@
+
 declare module 'h3' {
   interface H3EventContext {
     cf: CfProperties
     cloudflare: {
+      env: Env
       request: Request
-      env: Env & {
-        Sandbox: DurableObjectNamespace<Sandbox>
-      }
       context: ExecutionContext
     }
   }
