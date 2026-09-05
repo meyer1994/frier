@@ -13,6 +13,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare_module',
     // path is in relation to the ./server directory
+    // adapted from:https://github.com/nitrojs/nitro/discussions/3099#discussioncomment-13618572
     entry: process.env.NODE_ENV === 'production' ? './cfentry.ts' : undefined,
     cloudflare: {
       deployConfig: true,

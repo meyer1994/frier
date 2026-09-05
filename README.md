@@ -1,6 +1,10 @@
 # frier
 
-A single-page Nuxt app that spins up a remote [code-server](https://github.com/coder/code-server) instance inside a [Cloudflare Sandbox](https://developers.cloudflare.com/workers/runtime-apis/sandbox/) container and exposes it via a public tunnel.
+A single-page Nuxt app that spins up a remote
+[code-server](https://github.com/coder/code-server) instance inside a
+[Cloudflare
+Sandbox](https://developers.cloudflare.com/workers/runtime-apis/sandbox/)
+container and exposes it via a public tunnel.
 
 ## Commands
 
