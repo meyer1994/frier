@@ -1,10 +1,12 @@
 <script setup>
 type Service = 'codeserver' | 'marimo'
 
-const services: { value: Service; label: string; description: string }[] = [
-  { value: 'codeserver', label: 'VS Code Server', description: 'Remote VS Code instance' },
-  { value: 'marimo', label: 'Marimo', description: 'Interactive Python notebooks' },
-]
+const services = [
+  { value: 'codeserver' as const, label: 'VS Code Server', description: 'Remote VS Code instance', icon: 'i-lucide-code' },
+  { value: 'marimo' as const, label: 'Marimo', description: 'Interactive Python notebooks', icon: 'i-lucide-notebook-pen' },
+] as const
+
+const selectedLabel = computed(() => services.find(s => s.value === selected.value)?.label ?? '')
 
 const selected = ref<Service>('codeserver')
 const url = ref('')
@@ -40,9 +42,12 @@ async function onClick() {
       :items="services"
       orientation="horizontal"
     />
+    <p class="text-xs text-muted -mt-4">
+      {{ services.find(s => s.value === selected)?.description }}
+    </p>
 
     <UButton
-      :label="`Launch ${services.find(s => s.value === selected)?.label}`"
+      :label="`Launch ${selectedLabel}`"
       icon="i-lucide-play"
       size="lg"
       :loading="loading"
