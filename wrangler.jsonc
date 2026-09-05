@@ -16,7 +16,12 @@
   "containers": [
     {
       "class_name": "Sandbox",
-      "image": "/home/joao/prj/frier/Dockerfile",
+      "image": "/home/joao/prj/frier/Dockerfile.codeserver",
+      "instance_type": "standard-1"
+    },
+    {
+      "class_name": "Marimo",
+      "image": "/home/joao/prj/frier/Dockerfile.marimo",
       "instance_type": "standard-1"
     }
   ],
@@ -25,6 +30,10 @@
       {
         "name": "Sandbox",
         "class_name": "Sandbox"
+      },
+      {
+        "name": "Marimo",
+        "class_name": "Marimo"
       }
     ]
   },
@@ -33,6 +42,12 @@
       "tag": "v1",
       "new_sqlite_classes": [
         "Sandbox"
+      ]
+    },
+    {
+      "tag": "v2",
+      "new_sqlite_classes": [
+        "Marimo"
       ]
     }
   ]
