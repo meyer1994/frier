@@ -1,10 +1,10 @@
 FROM docker.io/cloudflare/sandbox:0.12.9
 
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv && rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install --break-system-packages marimo
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="$HOME/.local/bin:$PATH"
+RUN uv tool install marimo
 
 EXPOSE 8080
 
 # here for reference, cloudflare sandbox does not execute the CMD
-CMD ["marimo", "edit", "--host", "0.0.0.0", "--port", "8080", "--headless"]
+CMD ["uvx", "marimo", "edit", "--host", "0.0.0.0", "--port", "8080", "--headless", "--no-token"]

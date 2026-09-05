@@ -1,31 +1,12 @@
-<script setup>
+<script setup lang="ts">
+import type { TabsItem } from '@nuxt/ui'
+
 type Service = 'codeserver' | 'marimo'
 
-const services = [
-  { value: 'codeserver' as const, label: 'VS Code Server', description: 'Remote VS Code instance', icon: 'i-lucide-code' },
-  { value: 'marimo' as const, label: 'Marimo', description: 'Interactive Python notebooks', icon: 'i-lucide-notebook-pen' },
-] as const
-
-const selectedLabel = computed(() => services.find(s => s.value === selected.value)?.label ?? '')
-
-const selected = ref<Service>('codeserver')
-const url = ref('')
-const loading = ref(false)
-const error = ref('')
-
-async function onClick() {
-  loading.value = true
-  error.value = ''
-  url.value = ''
-  try {
-    const res = await $fetch(`/api/sandbox/${selected.value}`)
-    url.value = res.url
-  } catch {
-    error.value = 'Failed to start sandbox. Check console.'
-  } finally {
-    loading.value = false
-  }
-}
+const route = useRoute()
+const name = computed<Service>(() => route.query.name as Service ?? 'codeserver')
+const url = computed(() => `/api/sandbox/${name.value}`)
+const { data, error, execute, status } = useFetch(url, { immediate: false })
 </script>
 
 <template>
@@ -37,48 +18,33 @@ async function onClick() {
       Launch a remote development environment via Cloudflare Sandbox
     </p>
 
-    <URadioGroup
-      v-model="selected"
-      :items="services"
-      orientation="horizontal"
+    <UTabs
+      :model-value="name"
+      :items="([
+        { label: 'codeserver', value: 'codeserver' },
+        { label: 'marimo', value: 'marimo' }
+      ] satisfies TabsItem[])"
+      @update:model-value="async (v) => {
+        await navigateTo({ query: { name: v as string } })
+      }"
     />
-    <p class="text-xs text-muted -mt-4">
-      {{ services.find(s => s.value === selected)?.description }}
-    </p>
 
     <UButton
-      :label="`Launch ${selectedLabel}`"
+      :label="`Launch ${name}`"
       icon="i-lucide-play"
       size="lg"
-      :loading="loading"
-      @click="onClick"
+      :loading="status === 'pending'"
+      @click="() => execute()"
     />
 
     <UAlert
       v-if="error"
       color="error"
       variant="soft"
-      :title="error"
+      :title="error.message"
       class="w-full max-w-md"
     />
 
-    <div
-      v-if="url"
-      class="flex flex-col items-center gap-2"
-    >
-      <UBadge
-        color="success"
-        variant="soft"
-        label="Running"
-      />
-      <ULink
-        :to="url"
-        target="_blank"
-        external
-        class="text-lg underline break-all text-center max-w-md"
-      >
-        {{ url }}
-      </ULink>
-    </div>
+    <pre>{{ data }}</pre>
   </UContainer>
 </template>

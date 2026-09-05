@@ -41,14 +41,9 @@
     {
       "tag": "v1",
       "new_sqlite_classes": [
-        "Sandbox_CODESERVER"
-      ]
-    },
-    {
-      "tag": "v2",
-      "new_sqlite_classes": [
+        "Sandbox_CODESERVER",
         "Sandbox_MARIMO"
-      ]
+      ],
     }
   ]
 }
